@@ -1,5 +1,7 @@
 # KbdToPad · 键盘 → 虚拟手柄 映射工具
 
+**简体中文** ｜ [English](README.en.md)
+
 把键盘按键（尤其是 Windows 掌机的自定义键，如 `F13`–`F24`）映射成 **虚拟 Xbox 360 手柄** 的
 按键、扳机与**左右摇杆方向**，让不支持自定义按键的游戏也能用上掌机上的额外按键。
 
@@ -254,7 +256,8 @@ exe 由 PyInstaller 打包，容易被启发式误报（单文件版 `--onefile`
   复现步骤，以及 `%APPDATA%\KbdToPad\app.log`。
 * 提交代码前请保持现有代码风格（中文注释、`标准库 → 第三方库` 的导入顺序），
   并确认 `python -m py_compile kbd_to_pad.py app_info.py icon_art.py` 与 `python build.py --no-installer` 都能通过。
-* 若新增手柄目标，请同步更新 README 的「使用说明」表格与 `CHANGELOG.md`。
+* 若新增手柄目标，请同步更新 README（中文 [`README.md`](README.md) 与英文 [`README.en.md`](README.en.md)）
+  的「使用说明 / Usage」表格，以及 `CHANGELOG.md`。
 
 ## 致谢
 

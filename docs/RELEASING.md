@@ -11,7 +11,7 @@
 | `installer/KbdToPad.iss` | 安装包脚本（第 16 行的 `AppVersion` 是“直接用 IDE 编译”时的默认版本） |
 | `tools/make_icon.py`、`tools/make_screenshot.py` | 图标 / README 截图生成工具 |
 | `assets/app.ico`、`assets/*.png` | 图标资源（由 `build.py` 生成，体积小、直接入库便于查看） |
-| `docs/`、`README.md`、`CHANGELOG.md`、`LICENSE`、`THIRD_PARTY_NOTICES.md` | 文档；作者 / 版权署名统一为 `Ruozes`（`app_info.py` 的 `APP_AUTHOR` 与 `LICENSE`，构建时会写进 exe 版本资源与安装包“发布者”） |
+| `docs/`、`README.md`、`README.en.md`、`CHANGELOG.md`、`LICENSE`、`THIRD_PARTY_NOTICES.md` | 文档（`README.md` 为中文主页、`README.en.md` 为英文版，两份顶部互相链接）；作者 / 版权署名统一为 `Ruozes`（`app_info.py` 的 `APP_AUTHOR` 与 `LICENSE`，构建时会写进 exe 版本资源与安装包“发布者”） |
 
 | 不入库（见 `.gitignore`） | 原因 |
 | --- | --- |
@@ -68,6 +68,8 @@ exe 文件夹版作为 workflow artifact）。也可以手动触发（Actions �
 
 * 运行器需要联网下载 `installer/vendor/` 里的第三方二进制；若下载失败（如 GitHub API 限流），
   安装包会缺少驱动，此时改用本地构建的产物上传；
+* 若某个步骤长时间无进展（例如「安装依赖」一直停在 `pip install`），多为运行器网络问题：
+  在 Actions 页面取消该运行后点 **Re-run jobs** 重试，或改用本地 `python build.py` 的产物上传；
 * 中文语言文件下载失败时会自动回退为英文安装界面（不影响安装）；
 * workflow 首次运行请在 Actions 页面确认成功后再对外发布。
 

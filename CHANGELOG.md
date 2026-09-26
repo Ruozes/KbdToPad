@@ -6,6 +6,12 @@
 > 项目作者：[**@Ruozes**](https://github.com/Ruozes)；本项目（代码、文档与发布流程）由
 > [DeepSeek](https://www.deepseek.com/) 辅助完成。
 
+## [未发布]
+
+### 文档
+
+* 新增英文版说明文档 [`README.en.md`](README.en.md)：与中文版逐节对应，两份说明顶部互相提供语言切换链接。
+
 ## [0.1.1] - 2026-09-26
 
 首个公开版本。
@@ -40,5 +46,6 @@
 单实例运行、配置文件与日志、一键安装包（自动安装 ViGEmBus 驱动与 VC++ 运行库）。
 键盘侧此时仅支持 `F13`–`F24` 预设键与手柄按键，摇杆方向尚未支持。
 
+[未发布]: https://github.com/Ruozes/KbdToPad/compare/v0.1.1...HEAD
 [0.1.1]: https://github.com/Ruozes/KbdToPad/releases/tag/v0.1.1
 [0.1.0]: https://github.com/Ruozes/KbdToPad
