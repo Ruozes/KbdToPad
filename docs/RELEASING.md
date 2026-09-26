@@ -68,8 +68,10 @@ exe 文件夹版作为 workflow artifact）。也可以手动触发（Actions �
 
 * 运行器需要联网下载 `installer/vendor/` 里的第三方二进制；若下载失败（如 GitHub API 限流），
   安装包会缺少驱动，此时改用本地构建的产物上传；
-* 若某个步骤长时间无进展（例如「安装依赖」一直停在 `pip install`），多为运行器网络问题：
-  在 Actions 页面取消该运行后点 **Re-run jobs** 重试，或改用本地 `python build.py` 的产物上传；
+* 若「安装依赖」长时间无输出：`vgamepad` 在 PyPI 上只有源码包（`0.1.0` 没有 wheel），
+  pip 必须在运行器上现场构建 wheel，运行器网络异常时会停在 `Preparing metadata`。
+  此时取消该运行（日志里能看到具体停在哪一行），再重试；或直接用在本地
+  `python build.py` 构建的产物上传到 Release（工作流已给整条流水线加了 45 分钟超时）；
 * 中文语言文件下载失败时会自动回退为英文安装界面（不影响安装）；
 * workflow 首次运行请在 Actions 页面确认成功后再对外发布。
 

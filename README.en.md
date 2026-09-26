@@ -78,8 +78,8 @@ After clicking “⌨ Capture”, press any key you want to map:
 ## Download and install
 
 1. Open [Releases](https://github.com/Ruozes/KbdToPad/releases/latest) and download
-   `KbdToPad-Setup-0.1.1.exe` (about 39.5 MB — **the ViGEmBus driver and the VC++ runtime are bundled
-   inside**);
+   `KbdToPad-Setup-0.1.1.1.exe` (about 39.5 MB — **the ViGEmBus driver and the VC++ runtime are
+   bundled inside**);
 2. Run it (it asks for administrator rights). You can choose to create a desktop shortcut and to start
    the app with Windows;
 3. Once installed, launch the app → add a mapping → click “▶ Start listening”. Pressing the mapped key
@@ -89,9 +89,10 @@ The installer extracts the program to `%ProgramFiles%\KbdToPad`, silently instal
 runtime when they are missing, and on uninstall stops the process, removes the program and its
 uninstall entry, and asks whether to delete your configuration and logs as well.
 
-> **Portable use**: copy the whole install folder (by default `C:\Program Files\KbdToPad`) anywhere you
-> like — but you have to install the ViGEmBus driver yourself. Running from source works too; see the
-> next section.
+> **Portable use**: the same release page also ships a ready-to-extract
+> `KbdToPad-exe-0.1.1.1.zip` (about 15.7 MB — install the ViGEmBus driver yourself), or you can simply
+> copy the whole install folder (by default `C:\Program Files\KbdToPad`) anywhere you like. Running
+> from source works too; see the next section.
 
 ## Run from source
 
@@ -205,7 +206,7 @@ Outputs (the version number in the file names comes from `app_info.py`):
 ```text
 dist\KbdToPad\KbdToPad.exe                     folder build exe (default; starts faster)
 dist\KbdToPad.exe                              single-file exe (with --onefile)
-installer\Output\KbdToPad-Setup-0.1.1.exe      installer (~39.5 MB, measured)
+installer\Output\KbdToPad-Setup-0.1.1.1.exe    installer (~39.5 MB, measured)
 ```
 
 The driver / runtime bundled into the installer are downloaded by `build.py` into `installer\vendor\`
@@ -331,4 +332,4 @@ generated exe only).
 
 ## Changelog
 
-See [`CHANGELOG.md`](CHANGELOG.md) for the changes in every version; the current version is **v0.1.1**.
+See [`CHANGELOG.md`](CHANGELOG.md) for the changes in every version; the current version is **v0.1.1.1**.

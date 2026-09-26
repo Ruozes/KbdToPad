@@ -13,7 +13,7 @@
   #define AppName "键盘 → 虚拟手柄 映射工具"
 #endif
 #ifndef AppVersion
-  #define AppVersion "0.1.1"
+  #define AppVersion "0.1.1.1"
 #endif
 #ifndef AppPublisher
   #define AppPublisher "KbdToPad Project"

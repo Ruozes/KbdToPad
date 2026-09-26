@@ -67,15 +67,16 @@
 ## 下载与安装
 
 1. 打开 [Releases](https://github.com/Ruozes/KbdToPad/releases/latest)，
-   下载 `KbdToPad-Setup-0.1.1.exe`（约 39.5 MB，**已内含 ViGEmBus 驱动与 VC++ 运行库**）；
+   下载 `KbdToPad-Setup-0.1.1.1.exe`（约 39.5 MB，**已内含 ViGEmBus 驱动与 VC++ 运行库**）；
 2. 双击安装（会请求管理员权限），可选择创建桌面快捷方式与开机自动启动；
 3. 安装完成后启动程序 → 添加映射 → 点「▶ 开始监听」，按下映射的键即相当于按下手柄键。
 
 安装包会：把程序释放到 `%ProgramFiles%\KbdToPad`；系统缺少 ViGEmBus 驱动 / VC++ 运行库时自动静默安装；
 卸载时结束进程、删除程序与卸载项，并询问是否一并删除用户配置与日志。
 
-> **绿色版**：把安装目录（默认 `C:\Program Files\KbdToPad`）整个文件夹拷到别处即可，但需自行安装 ViGEmBus 驱动。
-> 从源码运行也可以，见下一节。
+> **绿色版**：不想安装可以下载同页的 `KbdToPad-exe-0.1.1.1.zip`（解压即用，约 15.7 MB，需自行安装
+> ViGEmBus 驱动）；也可以把安装目录（默认 `C:\Program Files\KbdToPad`）整个文件夹拷到别处。
+> 从源码运行见下一节。
 
 ## 从源码运行
 
@@ -174,7 +175,7 @@ python build.py --icons-only   # 只重新生成 assets\ 下的图标
 ```text
 dist\KbdToPad\KbdToPad.exe                    文件夹版 exe（默认；启动更快）
 dist\KbdToPad.exe                             单文件 exe（--onefile 时）
-installer\Output\KbdToPad-Setup-0.1.1.exe     中文安装包（约 39.5 MB，实测）
+installer\Output\KbdToPad-Setup-0.1.1.1.exe   中文安装包（约 39.5 MB，实测）
 ```
 
 安装包里附带的驱动 / 运行库由 `build.py` 自动下载到 `installer\vendor\`（已存在则跳过，不入库）：
@@ -281,5 +282,5 @@ exe 由 PyInstaller 打包，容易被启发式误报（单文件版 `--onefile`
 
 ## 更新记录
 
-各版本变更见 [`CHANGELOG.md`](CHANGELOG.md)；当前版本 **v0.1.1**。
+各版本变更见 [`CHANGELOG.md`](CHANGELOG.md)；当前版本 **v0.1.1.1**。
 

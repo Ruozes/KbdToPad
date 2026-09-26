@@ -4,7 +4,7 @@
 APP_NAME = "键盘 → 虚拟手柄 映射工具"
 APP_NAME_EN = "Keyboard to Virtual Gamepad Mapper"
 APP_SHORT = "KbdToPad"
-APP_VERSION = "0.1.1"
+APP_VERSION = "0.1.1.1"
 # 作者（GitHub 用户名）：exe 版本资源、安装包“发布者”与版权署名都用它
 APP_AUTHOR = "Ruozes"
 APP_PUBLISHER = APP_AUTHOR
