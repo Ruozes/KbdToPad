@@ -12,6 +12,7 @@
 | `tools/make_icon.py`、`tools/make_screenshot.py` | 图标 / README 截图生成工具 |
 | `assets/app.ico`、`assets/*.png` | 图标资源（由 `build.py` 生成，体积小、直接入库便于查看） |
 | `docs/`、`README.md`、`README.en.md`、`CHANGELOG.md`、`LICENSE`、`THIRD_PARTY_NOTICES.md` | 文档（`README.md` 为中文主页、`README.en.md` 为英文版，两份顶部互相链接）；作者 / 版权署名统一为 `Ruozes`（`app_info.py` 的 `APP_AUTHOR` 与 `LICENSE`，构建时会写进 exe 版本资源与安装包“发布者”） |
+| `third_party/wheels/` | 预置的第三方 wheel（目前只有 `vgamepad-0.1.0-py3-none-any.whl`，约 1.14 MB）：`vgamepad` 在 PyPI 上只有源码包，其 `setup.py` 会在构建期启动 ViGEmBus 驱动安装程序（CI 上会永久卡住），预置 wheel 后 pip 不再执行 `setup.py`（详见该目录的 `README.md`） |
 
 | 不入库（见 `.gitignore`） | 原因 |
 | --- | --- |
@@ -33,7 +34,9 @@
 python tools/make_screenshot.py
 
 # ③ 构建 exe 与安装包（需要 Inno Setup 6）
-pip install -r requirements-dev.txt
+#    用仓库内预置的 vgamepad wheel 安装：pip 不会执行 vgamepad 的 setup.py
+#    （该脚本在本机没装 ViGEmBus 时会弹驱动安装向导，在 CI 上会永久卡住）
+pip install --only-binary=:all: --find-links third_party/wheels -r requirements-dev.txt
 winget install -e --id JRSoftware.InnoSetup
 python build.py
 #   → dist\KbdToPad\KbdToPad.exe
@@ -68,10 +71,14 @@ exe 文件夹版作为 workflow artifact）。也可以手动触发（Actions �
 
 * 运行器需要联网下载 `installer/vendor/` 里的第三方二进制；若下载失败（如 GitHub API 限流），
   安装包会缺少驱动，此时改用本地构建的产物上传；
-* 若「安装依赖」长时间无输出：`vgamepad` 在 PyPI 上只有源码包（`0.1.0` 没有 wheel），
-  pip 必须在运行器上现场构建 wheel，运行器网络异常时会停在 `Preparing metadata`。
-  此时取消该运行（日志里能看到具体停在哪一行），再重试；或直接用在本地
-  `python build.py` 构建的产物上传到 Release（工作流已给整条流水线加了 45 分钟超时）；
+* 若「安装依赖」长时间无输出，说明 pip 又在运行器上执行了 `vgamepad` 的 `setup.py`：该脚本在
+  系统没装 ViGEmBus 时用 `msiexec` 启动驱动安装程序（无人值守的运行器上会永久阻塞，pip 停在
+  `Preparing metadata (pyproject.toml)`，日志收尾会留下 `Terminate orphan process: … (msiexec)`）。
+  工作流现已改为 `--only-binary=:all: --find-links third_party/wheels` 安装，正常情况下不会再出现；
+  万一出现，先确认 `third_party/wheels/vgamepad-0.1.0-py3-none-any.whl` 已入库、且 `requirements.txt`
+  里的 `vgamepad` 版本没有超出该 wheel 的版本（升级后需按 `third_party/wheels/README.md` 重新生成），
+  再取消运行并重跑；整条流水线有 45 分钟兜底超时。被取消的提交在网页上会一直挂着叉号标记，
+  想清掉只能让流水线真正跑绿；
 * 中文语言文件下载失败时会自动回退为英文安装界面（不影响安装）；
 * workflow 首次运行请在 Actions 页面确认成功后再对外发布。
 

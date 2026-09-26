@@ -27,13 +27,16 @@ jobs:
           python-version: "3.13"
           cache: pip
 
-      # vgamepad 在 PyPI 上只有源码包（0.1.0 无 wheel），必须由 pip 现场构建 wheel；
-      # 运行器网络异常时会长时间停在 “Preparing metadata”，因此限时 + 重试，失败要快。
+      # 所有依赖强制走 wheel：vgamepad 在 PyPI 上只有源码包，而它的 setup.py 在构建期
+      # 检测到系统没装 ViGEmBus 时，会用 msiexec 启动驱动安装程序 —— 在无人值守的运行器上
+      # 会永久阻塞（pip 停在 “Preparing metadata (pyproject.toml)”）。因此改用仓库内预置的
+      # third_party/wheels/vgamepad-0.1.0-py3-none-any.whl，并禁止任何依赖现场编译，
+      # 缺少 wheel 时立刻报错而不是挂住（详见 third_party/wheels/README.md）。
       - name: 安装依赖
         timeout-minutes: 20
         run: |
           python -m pip install --upgrade pip --retries 5 --timeout 30
-          pip install -r requirements-dev.txt --retries 5 --timeout 30
+          pip install --only-binary=:all: --find-links third_party/wheels -r requirements-dev.txt --retries 5 --timeout 30
 
       - name: 安装 Inno Setup 6
         run: choco install innosetup --no-progress -y

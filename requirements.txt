@@ -1,5 +1,9 @@
 # 运行本工具所需的第三方库
 #   pip install -r requirements.txt
+#
+# 注意：vgamepad 在 PyPI 上只有源码包，其 setup.py 会在安装时启动 ViGEmBus 驱动安装程序
+# （本机没装 ViGEmBus 会弹出安装向导，CI 上会永久卡住）。仓库内已预置它的 wheel，推荐这样装：
+#   pip install --only-binary=:all: --find-links third_party/wheels -r requirements.txt
 keyboard>=0.13.5
 vgamepad>=0.1.0
 pystray>=0.19.5

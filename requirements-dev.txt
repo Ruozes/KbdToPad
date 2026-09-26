@@ -1,4 +1,6 @@
 # 打包 exe / 生成安装包所需的额外依赖
-#   pip install -r requirements-dev.txt
+#   pip install --only-binary=:all: --find-links third_party/wheels -r requirements-dev.txt
+#   ↑ 用仓库内预置的 vgamepad wheel（third_party/wheels/），避免 pip 执行 vgamepad 的 setup.py
+#     —— 它会在系统没装 ViGEmBus 时启动驱动安装程序（CI 上会永久卡住）
 -r requirements.txt
 pyinstaller>=6.6.0
