@@ -1,0 +1,44 @@
+# ===== 构建产物（由 build.py / PyInstaller 生成，不入库）=====
+build/
+dist/
+
+# 安装包输出目录
+installer/Output/
+
+# 随安装包分发的第三方二进制（约 31 MB：ViGEmBus 驱动 + VC++ 运行库 + 中文语言文件）
+# 由 build.py 在构建时自动下载，无需入库（详见 docs/RELEASING.md）
+installer/vendor/
+
+# build.py 生成的 Inno Setup 构建参数（程序名/版本/源目录）
+installer/build_defines.iss
+
+# build.py 生成的 exe 版本资源（每次构建都会重新写）
+assets/version_info.txt
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ===== 运行期产物（正常情况下在 %APPDATA%\KbdToPad）=====
+app.log
+app.log.*
+config.json
+
+# ===== 本地临时脚本 / 输出（开发调试用）=====
+_*.py
+_*.txt
+_*.png
+
+# ===== 改动前的本地备份（需要时查 git 历史即可）=====
+backup/
+
+# ===== 编辑器 / 系统 =====
+.vscode/
+.idea/
+*.swp
+*~
+Thumbs.db
+desktop.ini

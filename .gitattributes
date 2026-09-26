@@ -1,0 +1,18 @@
+# 统一换行与编码处理（Windows 专用项目：检出用 CRLF，仓库内存 LF）
+* text=auto
+
+*.py        text
+*.md        text
+*.txt       text
+*.json      text
+*.yml       text eol=lf
+*.iss       text eol=crlf
+*.spec      text
+*.ps1       text eol=crlf
+*.bat       text eol=crlf
+
+# 二进制资源
+*.ico       binary
+*.png       binary
+*.exe       binary
+*.dll       binary

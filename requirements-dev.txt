@@ -1,0 +1,4 @@
+# 打包 exe / 生成安装包所需的额外依赖
+#   pip install -r requirements-dev.txt
+-r requirements.txt
+pyinstaller>=6.6.0
